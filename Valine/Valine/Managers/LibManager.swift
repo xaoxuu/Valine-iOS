@@ -37,7 +37,7 @@ struct LibManager {
     static func configInspire() {
         Inspire.shared.layout.margin = 20
         Inspire.shared.font.body = "Courier-Bold"
-        Inspire.shared.color.accent = UIColor("#44D7B6")
+        Inspire.shared.color.accent = UIColor("#32C5FF")
     }
     
     
