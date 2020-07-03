@@ -54,8 +54,7 @@ class LoginConfigVC: BaseVC {
         reloadData()
         
         NotificationCenter.default.rx.notification(.init("onLogin")).subscribe(onNext: { [weak self] (notification) in
-            self?.dismiss(animated: true, completion: nil)
-            self?.dismiss(animated: true, completion: nil)
+            self?.presentingViewController?.dismiss(animated: true, completion: nil)
         }).disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(.init("reloadConfig")).subscribe(onNext: { [weak self] (notification) in

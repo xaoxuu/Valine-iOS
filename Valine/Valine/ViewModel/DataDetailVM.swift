@@ -64,23 +64,10 @@ extension DataDetailVM: UITableViewDataSource {
             cell.detailTextLabel?.alpha = 0.35
             cell.isUserInteractionEnabled = false
         }
-        // FIXME: 发现复用布局有问题，暂时不知道怎么解决
-        if let lb1 = cell.textLabel, let lb2 = cell.detailTextLabel, lb1.superview != nil, lb2.superview != nil {
-            let margin = ipr.layout.margin
-            lb1.snp.remakeConstraints({ (mk) in
-                mk.top.equalToSuperview().offset(margin-4)
-                mk.width.equalToSuperview().offset(-margin*2)
-                mk.centerX.equalToSuperview()
-            })
-            lb2.snp.remakeConstraints({ (mk) in
-                mk.width.equalToSuperview().offset(-margin*2)
-                mk.centerX.equalToSuperview()
-                mk.width.lessThanOrEqualToSuperview().offset(-margin*2).priority(.high)
-                mk.bottom.equalToSuperview().offset(-margin)
-                mk.top.equalTo(lb1.snp.bottom).offset(margin/2)
-            })
-        }
         
+        if let cell = cell as? DataDetailCell {
+            cell.updateLayout()
+        }
         return cell
     }
     

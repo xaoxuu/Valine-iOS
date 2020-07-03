@@ -100,15 +100,16 @@ struct LoginManager {
                 })
             }
         }
-        LoginUI.accountDefault = UserDefaults.standard.string(forKey: "leancloud.account")
+        if let app = ValineAppModel.current {
+            LoginUI.accountDefault = UserDefaults.standard.string(forKey: "leancloud.account:\(app.id)")
+        }
         return LoginUI.present(from: vc)
     }
     
     static func login(acc: String, psw: String) {
-        if let a = ValineAppModel.current {
-            if LibManager.configLeanCloud(id: a.id, key: a.key) {
-                a.save()
-            }
+        guard let app = ValineAppModel.current else { return }
+        if LibManager.configLeanCloud(id: app.id, key: app.key) {
+            app.save()
         }
         Alert.push("login", scene: .login)
         let _ = LCUser.logIn(username: acc, password: psw) { (result) in
@@ -118,7 +119,7 @@ struct LoginManager {
                 case .success:
                     if let sessionToken = result.object?.sessionToken {
                         UserDefaults.standard.set(sessionToken.rawValue, forKey: "leancloud.sessionToken")
-                        UserDefaults.standard.set(acc, forKey: "leancloud.account")
+                        UserDefaults.standard.set(acc, forKey: "leancloud.account:\(app.id)")
                         UserDefaults.standard.synchronize()
                     }
                 case .failure(let error):

@@ -31,7 +31,8 @@ extension UserCenterVC {
         if let valine = ValineAppModel.current {
             vm.addSection(title: "实例信息") { (sec) in
                 sec.addRow(title: valine.alias, subtitle: "AppID: \(valine.id)\nAppKey: \(valine.key)") {
-                    
+                    let vc = LoginConfigVC()
+                    self.present(vc, animated: true, completion: nil)
                 }
             }
         }

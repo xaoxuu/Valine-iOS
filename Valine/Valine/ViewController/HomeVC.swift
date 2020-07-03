@@ -83,6 +83,7 @@ class HomeVC: BaseVC {
         reloadData(toast: false, completion: nil)
     }
     @objc func onLogin(_ sender: NSNotification) {
+        self.navigationController?.popToRootViewController(animated: true)
         reloadData(toast: false, completion: nil)
     }
     private var isReloading = false

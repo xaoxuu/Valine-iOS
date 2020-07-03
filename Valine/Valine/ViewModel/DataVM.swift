@@ -115,7 +115,10 @@ extension DataVM: UITableViewDataSource {
             }
             detail = detail.trimmingCharacters(in: .whitespacesAndNewlines)
             cell.detailTextLabel?.text = detail
-        } 
+        }
+        if let cell = cell as? DataCell {
+            cell.updateLayout()
+        }
         return cell
     }
     
