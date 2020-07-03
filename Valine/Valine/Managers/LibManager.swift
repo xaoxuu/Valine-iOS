@@ -22,15 +22,24 @@ var ipr: Inspire {
 
 struct LibManager {
 
-    static func configLeanCloud(id: String, key: String) {
+    @discardableResult
+    static func configLeanCloud(id: String, key: String) -> Bool {
         var configuration = LCApplication.Configuration.default
         configuration.HTTPURLCache = URLCache(memoryCapacity: 100 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024)
-        
-        // test
-        try? LCApplication.default.set(id: id, key: key, configuration: configuration)
-        
-        LCApplication.logLevel = .debug 
-        
+        do {
+            try LCApplication.default.set(id: id, key: key, configuration: configuration)
+            LCApplication.logLevel = .debug
+            return true
+        } catch {
+            Alert.push("error", scene: .error) { (a) in
+                a.update { (vm) in
+                    vm.title = "配置失败"
+                    vm.message = "找不到云应用实例"
+                    vm.add(action: .default, title: "我知道了", handler: nil)
+                }
+            }
+            return false
+        }
     }
     
     

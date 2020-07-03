@@ -117,9 +117,7 @@ class LoginConfigVC: BaseVC {
     }
     
     func input(idx: Int) {
-        tfAlias.tf.resignFirstResponder()
-        tfID.tf.resignFirstResponder()
-        tfKEY.tf.resignFirstResponder()
+        view.endEditing(true)
         switch idx {
         case 0:
             tfAlias.tf.becomeFirstResponder()
@@ -132,6 +130,7 @@ class LoginConfigVC: BaseVC {
         }
     }
     func login() {
+        view.endEditing(true)
         if tfAlias.tf.text?.isEmpty ?? true {
             input(idx: 0)
             return
@@ -145,14 +144,15 @@ class LoginConfigVC: BaseVC {
             return
         }
         if let alias = tfAlias.tf.text, let id = tfID.tf.text, let key = tfKEY.tf.text {
-            LibManager.configLeanCloud(id: id, key: key)
-            let vc = LoginManager.login(from: self)
-            vc.onDismiss { [weak self] in
-                self?.reloadData()
+            if LibManager.configLeanCloud(id: id, key: key) {
+                let vc = LoginManager.login(from: self)
+                vc.onDismiss { [weak self] in
+                    self?.reloadData()
+                }
+                let a = ValineAppModel(alias: alias, id: id, key: key)
+                a.save()
+                ValineAppModel.current = a
             }
-            let a = ValineAppModel(alias: alias, id: id, key: key)
-            a.save()
-            ValineAppModel.current = a
         }
     }
     func setupDefaultText(_ model: ValineAppModel? = .current) {

@@ -106,8 +106,9 @@ struct LoginManager {
     
     static func login(acc: String, psw: String) {
         if let a = ValineAppModel.current {
-            LibManager.configLeanCloud(id: a.id, key: a.key)
-            a.save()
+            if LibManager.configLeanCloud(id: a.id, key: a.key) {
+                a.save()
+            }
         }
         Alert.push("login", scene: .login)
         let _ = LCUser.logIn(username: acc, password: psw) { (result) in

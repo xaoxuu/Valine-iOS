@@ -13,6 +13,19 @@ struct ErrorManager {
  
     
     @discardableResult
+    init(error: Error?, id: String? = "error") {
+        if let err = error {
+            Alert.push(id ?? "error", scene: .error) { (a) in
+                a.update { (vm) in
+                    vm.title = "操作失败"
+                    vm.message = err.localizedDescription
+                    vm.add(action: .default, title: "我知道了", handler: nil)
+                }
+            } 
+        }
+    }
+    
+    @discardableResult
     init(lcError: LCError?, id: String? = "error") {
         if let err = lcError {
             Alert.push(id ?? "error:\(err.code)", scene: .error) { (a) in
