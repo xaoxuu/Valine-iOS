@@ -36,31 +36,51 @@ class DataDetailVM: NSObject {
 extension DataDetailVM: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return keys.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return keys.count
     }
      
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.description(), for: indexPath)
-        let k = keys[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: view?.bindCell.description() ?? "cell", for: indexPath)
+        let k = keys[indexPath.row]
+        cell.textLabel?.text = k
         let obj = object.get(k)
         if let str = obj?.stringValue {
-            cell.textLabel?.text =  str
+            cell.detailTextLabel?.text =  str.trimmingCharacters(in: .whitespacesAndNewlines)
         } else if let date = obj?.dateValue {
-            cell.textLabel?.text =  date.fullDesc
+            cell.detailTextLabel?.text =  date.fullDesc
         } else {
-            cell.textLabel?.text = obj?.lcValue.jsonString
+            cell.detailTextLabel?.text = obj?.lcValue.jsonString
         }
         if ["__type", "className", "objectId", "createdAt", "updatedAt","insertedAt", "pid", "rid"].contains(k) == false {
             cell.textLabel?.alpha = 1
+            cell.detailTextLabel?.alpha = 1
             cell.isUserInteractionEnabled = true
         } else {
-            cell.textLabel?.alpha = 0.5
+            cell.textLabel?.alpha = 0.35
+            cell.detailTextLabel?.alpha = 0.35
             cell.isUserInteractionEnabled = false
         }
+        // FIXME: 发现复用布局有问题，暂时不知道怎么解决
+        if let lb1 = cell.textLabel, let lb2 = cell.detailTextLabel, lb1.superview != nil, lb2.superview != nil {
+            let margin = ipr.layout.margin
+            lb1.snp.remakeConstraints({ (mk) in
+                mk.top.equalToSuperview().offset(margin-4)
+                mk.width.equalToSuperview().offset(-margin*2)
+                mk.centerX.equalToSuperview()
+            })
+            lb2.snp.remakeConstraints({ (mk) in
+                mk.width.equalToSuperview().offset(-margin*2)
+                mk.centerX.equalToSuperview()
+                mk.width.lessThanOrEqualToSuperview().offset(-margin*2).priority(.high)
+                mk.bottom.equalToSuperview().offset(-margin)
+                mk.top.equalTo(lb1.snp.bottom).offset(margin/2)
+            })
+        }
+        
         return cell
     }
     
@@ -70,7 +90,7 @@ extension DataDetailVM: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let k = keys[indexPath.section]
+        let k = keys[indexPath.row]
         let vc = EditTextVC(title: k, text: "") { (str) in
             ProHUD.Alert.push("update", scene: .update) { (a) in
                 a.update { (vm) in
@@ -111,7 +131,7 @@ extension DataDetailVM: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return keys[section]
+        return object.createdAt?.lcValue.dateValue?.fullDesc
     }
     
 }

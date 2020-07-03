@@ -28,6 +28,8 @@
 		952A971824AD8D99005F3CBD /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A971724AD8D99005F3CBD /* CacheManager.swift */; };
 		952A971A24AD8F34005F3CBD /* ValineAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A971924AD8F34005F3CBD /* ValineAppModel.swift */; };
 		952A971D24AD9297005F3CBD /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A971C24AD9297005F3CBD /* TextField.swift */; };
+		95B51BED24AEE12500E4A562 /* LoginConfigEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B51BEC24AEE12500E4A562 /* LoginConfigEditVC.swift */; };
+		95B51BEF24AEFA0C00E4A562 /* DataDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B51BEE24AEFA0C00E4A562 /* DataDetailCell.swift */; };
 		95C8B9EC24AD822900542BEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8B9EB24AD822900542BEE /* AppDelegate.swift */; };
 		95C8B9EE24AD822900542BEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8B9ED24AD822900542BEE /* SceneDelegate.swift */; };
 		95C8B9F024AD822900542BEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8B9EF24AD822900542BEE /* ViewController.swift */; };
@@ -63,6 +65,8 @@
 		952A971724AD8D99005F3CBD /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		952A971924AD8F34005F3CBD /* ValineAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValineAppModel.swift; sourceTree = "<group>"; };
 		952A971C24AD9297005F3CBD /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		95B51BEC24AEE12500E4A562 /* LoginConfigEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfigEditVC.swift; sourceTree = "<group>"; };
+		95B51BEE24AEFA0C00E4A562 /* DataDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailCell.swift; sourceTree = "<group>"; };
 		95C8B9E824AD822900542BEE /* Valine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C8B9EB24AD822900542BEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95C8B9ED24AD822900542BEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				952A96EE24AD8C5D005F3CBD /* LoginConfigVC.swift */,
+				95B51BEC24AEE12500E4A562 /* LoginConfigEditVC.swift */,
 				952A96F324AD8CA6005F3CBD /* DataDetailVC.swift */,
 				952A96F424AD8CA6005F3CBD /* EditTextVC.swift */,
 				952A96F524AD8CA6005F3CBD /* UserCenterVC.swift */,
@@ -126,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				952A96FF24AD8CA6005F3CBD /* DataCell.swift */,
+				95B51BEE24AEFA0C00E4A562 /* DataDetailCell.swift */,
 				952A970024AD8CA6005F3CBD /* DataTable.swift */,
 				952A970124AD8CA6005F3CBD /* BaseButton.swift */,
 				952A971C24AD9297005F3CBD /* TextField.swift */,
@@ -284,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95C8B9F024AD822900542BEE /* ViewController.swift in Sources */,
+				95B51BEF24AEFA0C00E4A562 /* DataDetailCell.swift in Sources */,
 				952A970D24AD8CA7005F3CBD /* BaseNavVC.swift in Sources */,
 				952A971D24AD9297005F3CBD /* TextField.swift in Sources */,
 				952A971224AD8CA7005F3CBD /* UserManager.swift in Sources */,
@@ -303,6 +310,7 @@
 				952A971624AD8CFE005F3CBD /* LibManager.swift in Sources */,
 				952A970624AD8CA7005F3CBD /* DataDetailVC.swift in Sources */,
 				95C8B9EE24AD822900542BEE /* SceneDelegate.swift in Sources */,
+				95B51BED24AEE12500E4A562 /* LoginConfigEditVC.swift in Sources */,
 				952A970C24AD8CA7005F3CBD /* BaseVC.swift in Sources */,
 				952A96EF24AD8C5D005F3CBD /* LoginConfigVC.swift in Sources */,
 				952A970B24AD8CA7005F3CBD /* DataDetailVM.swift in Sources */,

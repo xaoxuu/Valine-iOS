@@ -81,12 +81,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 var selected = ValineAppModel(alias: alias ?? "", id: id, key: key)
                 selected.account = user
                 selected.password = psw
-                ValineAppModel.current = selected
                 if let u = user, let p = psw {
                     // 如果账号和密码都有，就直接登录了
+                    ValineAppModel.current = selected
                     LoginManager.login(acc: u, psw: p)
                 } else {
-                    NotificationCenter.default.post(name: .init("openURL.cfg"), object: selected)
+                    selected.save()
+                    Alert.push(scene: .success, title: "已保存应用", message: "", nil)
+                    NotificationCenter.default.post(name: .init("reloadConfig"), object: selected)
                 }
                 
             } else {

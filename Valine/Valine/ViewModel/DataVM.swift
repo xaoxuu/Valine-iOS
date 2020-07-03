@@ -90,22 +90,25 @@ extension DataVM: UITableViewDataSource {
         return nil
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.description(), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: view?.bindCell.description() ?? "cell", for: indexPath)
         var detail = ""
         if indexPath.section < dataList.count {
             let obj = dataList[indexPath.section]
             detail += "createdAt: \(obj.createdAt?.dateValue?.fullDesc ?? "")\n"
             detail += "updatedAt: \(obj.updatedAt?.dateValue?.fullDesc ?? "")\n"
             if let dict = dict(for: indexPath.section) {
+                if let str = dict["comment"] {
+                    cell.textLabel?.text = str.stringValue?.trimmingCharacters(in: .whitespacesAndNewlines)
+                }
                 for k in dict.keys.sorted() {
-                    if ["__type", "className", "objectId", "createdAt", "updatedAt"].contains(k) == false {
+                    if ["__type", "className", "objectId", "createdAt", "updatedAt", "comment"].contains(k) == false {
                         let o = obj.get(k)
                         if let str = o?.stringValue {
                             detail += "\(k): \(str)\n"
                         } else if let date = o?.dateValue {
                             detail += "\(k): \(date.fullDesc)\n"
                         } else {
-                            detail += "\(k): \(o?.lcValue.jsonString.description)\n"
+                            detail += "\(k): \(o?.lcValue.jsonString ?? "")\n"
                         }
                     }
                 }

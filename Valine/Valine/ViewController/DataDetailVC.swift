@@ -33,6 +33,8 @@ class DataDetailVC: BaseVC {
         }
         table.dataSource = vm
         table.delegate = vm
+        table.bindCell = DataDetailCell.self
+        table.register(DataDetailCell.self, forCellReuseIdentifier: DataDetailCell.description())
         vm.view = table
         vm.controller = self
         

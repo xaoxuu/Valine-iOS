@@ -58,8 +58,7 @@ struct ValineAppModel {
         }
         // ceshi
         if all.isEmpty {
-            all.append(ValineAppModel(alias: "测试", id: "7yIoRlSmfX09vQCERsuWzFnx-MdYXbMMI", key: "3zCL5GFePTUjwbqLop44QFbr"))
-            all.append(ValineAppModel(alias: "清空", id: "", key: ""))
+            all.append(ValineAppModel(alias: "测试应用", id: "7yIoRlSmfX09vQCERsuWzFnx-MdYXbMMI", key: "3zCL5GFePTUjwbqLop44QFbr"))
         } 
         return all
     }
