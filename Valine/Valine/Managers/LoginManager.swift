@@ -63,6 +63,7 @@ struct LoginManager {
                                 if result.isSuccess {
                                     vm.scene = .success
                                     vm.title = "注册成功"
+                                    LoginUI.navTo(.login)
                                 } else {
                                     vm.scene = .failure
                                     vm.title = "注册失败"
@@ -91,7 +92,11 @@ struct LoginManager {
                         Alert.push("reseting", scene: .success) { (a) in
                             a.update { (vm) in
                                 vm.title = "操作成功"
-                                vm.message = "密码重置邮件已经发送到您的邮箱"
+                                vm.message = "密码重置邮件已经发送到您的邮箱，请按照邮件中的提示进行操作。"
+                                vm.add(action: .default, title: "我知道了") {
+                                    LoginUI.navTo(.login)
+                                    a.pop()
+                                }
                             }
                         }
                     case .failure(let error):
